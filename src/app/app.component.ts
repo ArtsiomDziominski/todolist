@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
-  title = 'todolist';
+  public isToggleVersion: boolean = true;
+  public dateTime: Date = new Date();
+
+  constructor() {
+    this.updateTime()
+  }
+
+  public updateTime(): void {
+    setInterval(() => this.dateTime = new Date(), 1000);
+  }
+
 }

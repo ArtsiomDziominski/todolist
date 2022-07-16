@@ -1,0 +1,3 @@
+<img (click)="toggleDoneTask()" class="task-list__img-toggle" [class.task-list__item--task-completed]="task!.isDone"
+     src="../../../assets/check.svg" alt="checkbox">
+<p>{{ task?.name }}<p>

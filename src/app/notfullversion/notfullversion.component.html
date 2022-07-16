@@ -1,0 +1,57 @@
+<h1 class="page-title">{{title}}</h1>
+<div class="dashboard">
+  <div class="dashboard-info">
+    <div class="dashboard-info__list">
+      <div class="dashboard-info__item dashboard-info__item__background">
+        <p class="tag__name">Tasks</p>
+        <p class="tag__value">{{allTasks.length}}</p>
+      </div>
+      <div class="dashboard-info__item dashboard-info__item__background">
+        <p class="tag__name">Tasks Done</p>
+        <p class="tag__value">{{countDoneTask()}}</p>
+      </div>
+      <div class="dashboard-info__item" *ngIf="countDoneTask()">
+        <button class="dashboard-info__btn-delete"
+                (click)="deleteDoneTask()"><img src="../../assets/bin.svg" alt="Delete done task">Tasks done
+        </button>
+      </div>
+      <div class="dashboard-info__item" *ngIf="allTasks.length">
+        <button class="dashboard-info__btn-delete"
+                (click)="deleteAllTasks()"><img src="../../assets/bin.svg" alt="Delete task">Tasks
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-content">
+    <div class="task-list__wrapper">
+      <div class="task-list">
+
+        <div *ngFor="let task of allTasks" class="task-list__item"
+             [class.task-list__item-task-completed]="task.isDone">
+
+          <app-task [task]="task" (changeStatus)="toggleDoneTask(task)"></app-task>
+
+          <div class="task-list__btn">
+            <p class="task-list__time">{{ task.time | date:'shortDate' }}  {{ task.time | date:'shortTime' }}</p>
+            <img class="task-list__bin" src="../../assets/bin.svg" (click)="deleteOneTask(task.name)" alt="Delete task">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="task-new">
+      <div class="task-new__field" [class.task-new__input-Check]="isInvalidInput">
+        <input type="text" placeholder="New task" [(ngModel)]="task" maxlength="45"
+               (keydown.enter)="addTaskToList(task)">
+        <button (click)="addTaskToList(task)">
+          <img class="btn-icon-new-task" src="../../assets/new.svg" alt="Add new task">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn-info" *ngIf="!isShowInfoContent; else infoTemplate" (click)="toggleInfoText()">Show Info</button>
+<ng-template #infoTemplate>
+  <span class="info-content" (click)="toggleInfoText()">
+    <p>This application uses the browser's Local Storage to store data</p>
+  </span>
+</ng-template>
