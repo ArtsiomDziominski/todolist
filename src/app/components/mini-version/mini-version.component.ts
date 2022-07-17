@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {ITask} from "../interface/tasks";
+import {ITask} from "../../interface/tasks";
 
 
 @Component({
-  selector: 'app-notfullversion',
-  templateUrl: './notfullversion.component.html',
-  styleUrls: ['./notfullversion.component.scss']
+  selector: 'app-mini-version',
+  templateUrl: './mini-version.component.html',
+  styleUrls: ['./mini-version.component.scss']
 })
 
-export class NotfullversionComponent {
+export class MiniVersionComponent {
   public readonly title = 'Angular ToDo List';
   public readonly storageAllTasksKey: string = 'allTasks';
 

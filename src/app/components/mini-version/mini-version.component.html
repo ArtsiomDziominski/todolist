@@ -12,12 +12,12 @@
       </div>
       <div class="dashboard-info__item" *ngIf="countDoneTask()">
         <button class="dashboard-info__btn-delete"
-                (click)="deleteDoneTask()"><img src="../../assets/bin.svg" alt="Delete done task">Tasks done
+                (click)="deleteDoneTask()"><img src="../../../assets/bin.svg" alt="Delete done task">Tasks done
         </button>
       </div>
       <div class="dashboard-info__item" *ngIf="allTasks.length">
         <button class="dashboard-info__btn-delete"
-                (click)="deleteAllTasks()"><img src="../../assets/bin.svg" alt="Delete task">Tasks
+                (click)="deleteAllTasks()"><img src="../../../assets/bin.svg" alt="Delete task">Tasks
         </button>
       </div>
     </div>
@@ -33,7 +33,7 @@
 
           <div class="task-list__btn">
             <p class="task-list__time">{{ task.time | date:'shortDate' }}  {{ task.time | date:'shortTime' }}</p>
-            <img class="task-list__bin" src="../../assets/bin.svg" (click)="deleteOneTask(task.name)" alt="Delete task">
+            <img class="task-list__bin" src="../../../assets/bin.svg" (click)="deleteOneTask(task.name)" alt="Delete task">
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
         <input type="text" placeholder="New task" [(ngModel)]="task" maxlength="45"
                (keydown.enter)="addTaskToList(task)">
         <button (click)="addTaskToList(task)">
-          <img class="btn-icon-new-task" src="../../assets/new.svg" alt="Add new task">
+          <img class="btn-icon-new-task" src="../../../assets/new.svg" alt="Add new task">
         </button>
       </div>
     </div>
