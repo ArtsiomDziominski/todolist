@@ -51,6 +51,7 @@ export class FullVersionComponent {
     return this.doneTasks
   }
 
+
   // public get inProgress(): ITask[] {
   //   return
   // }
