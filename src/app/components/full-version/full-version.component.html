@@ -1,28 +1,14 @@
+<input (keydown.enter)="addTask(name)" [(ngModel)]="name">
+
 <div cdkDropListGroup>
   <div class="example-container">
     <h2>To do</h2>
 
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Add task">
-      <button class="btn btn-outline-secondary" type="button">Add</button>
-    </div>
-
     <div
       cdkDropList
-      [cdkDropListData]="task"
+      [cdkDropListData]="todoTasks"
       class="example-list">
-      <div class="example-box" *ngFor="let item of task" cdkDrag>{{item.name}}</div>
-    </div>
-  </div>
-
-  <div class="example-container">
-    <h2>In progress</h2>
-
-    <div
-      cdkDropList
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of task" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item.name}}</div>
     </div>
   </div>
 
@@ -31,11 +17,9 @@
 
     <div
       cdkDropList
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of task" cdkDrag>{{item}}</div>
+      [cdkDropListData]="doneTasks"
+      class="example-list">
+      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name}}</div>
     </div>
   </div>
 </div>
-
-

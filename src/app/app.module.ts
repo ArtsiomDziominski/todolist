@@ -7,13 +7,15 @@ import {TaskComponent} from './components/task/task.component';
 import {FullVersionComponent} from './components/full-version/full-version.component';
 import {MiniVersionComponent} from './components/mini-version/mini-version.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { InputComponent } from './components/input/input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
     FullVersionComponent,
-    MiniVersionComponent
+    MiniVersionComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,

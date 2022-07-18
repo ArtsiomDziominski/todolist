@@ -39,12 +39,10 @@
       </div>
     </div>
     <div class="task-new">
-      <div class="task-new__field" [class.task-new__input-Check]="isInvalidInput">
-        <input type="text" placeholder="New task" [(ngModel)]="task" maxlength="45"
-               (keydown.enter)="addTaskToList(task)">
-        <button (click)="addTaskToList(task)">
-          <img class="btn-icon-new-task" src="../../../assets/new.svg" alt="Add new task">
-        </button>
+      <div class="task-new__field" [class.task-new__input-check]="isInvalidInput">
+
+        <app-input (changeStatusInput)="addTaskToList($event)"></app-input>
+
       </div>
     </div>
   </div>

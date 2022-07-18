@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {ITask} from "../../interface/tasks";
+import {ITask, Status} from "../../interface/tasks";
+import {updateLocalStorage} from "../../update-local-storage";
+import {getTasksFromLocalStorage} from "../../get-tasks-from-local-storage";
 
 
 @Component({
@@ -25,57 +27,65 @@ export class MiniVersionComponent {
     this.isInvalidInput = inputCheck;
   }
 
-  public updateLocalStorage(tasks: ITask[]): void {
-    localStorage.setItem(this.storageAllTasksKey, JSON.stringify(tasks));
-  }
+  // public updateLocalStorage(tasks: ITask[]): void {
+  //   localStorage.setItem(this.storageAllTasksKey, JSON.stringify(tasks));
+  // }
 
-  public getTasksFromLocalStorage(): ITask[] {
-    let getListTask: string = localStorage.getItem(this.storageAllTasksKey) || '[]';
-    return JSON.parse(getListTask);
-  }
+  // public getTasksFromLocalStorage(): ITask[] {
+  //   let getListTask: string = localStorage.getItem(this.storageAllTasksKey) || '[]';
+  //   return JSON.parse(getListTask);
+  // }
 
   public checkDuplicatedTask(name: string): boolean {
     return this.allTasks.some(task => task.name === name);
   }
 
   constructor() {
-    this.allTasks = this.getTasksFromLocalStorage();
+    this.allTasks = getTasksFromLocalStorage(this.storageAllTasksKey);
   }
 
   public addTaskToList(task: string): void {
     const newTask: string = task.trim();
+
     if (newTask && !this.checkDuplicatedTask(this.task)) {
       this.setValidityToInput(false);
 
       let dataTasks: ITask = {
         name: newTask,
         isDone: false,
-        time: new Date()
+        time: new Date(),
+        status: Status.ToDo
       };
 
       this.allTasks.push(dataTasks);
 
       this.task = '';
 
-      this.updateLocalStorage(this.allTasks);
+      updateLocalStorage(this.allTasks);
     } else {
       this.setValidityToInput(true);
+      console.log(true)
     }
   }
 
   public toggleDoneTask(task: ITask): void {
     task.isDone = !task.isDone;
-    this.updateLocalStorage(this.allTasks);
+    if (task.status === Status.ToDo) {
+      task.status = Status.Done
+    } else {
+      task.status = Status.ToDo
+    }
+    updateLocalStorage(this.allTasks, this.storageAllTasksKey);
   }
 
   public deleteOneTask(name: string): void {
     this.allTasks = this.allTasks.filter(task => task.name !== name);
-    this.updateLocalStorage(this.allTasks);
+    updateLocalStorage(this.allTasks, this.storageAllTasksKey);
   }
 
   public deleteDoneTask(): void {
     this.allTasks = this.allTasks.filter(task => !task.isDone);
-    this.updateLocalStorage(this.allTasks);
+    updateLocalStorage(this.allTasks, this.storageAllTasksKey);
   }
 
   public deleteAllTasks(): void {
