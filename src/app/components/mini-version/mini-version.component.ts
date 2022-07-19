@@ -64,7 +64,6 @@ export class MiniVersionComponent {
       updateLocalStorage(this.allTasks);
     } else {
       this.setValidityToInput(true);
-      console.log(true)
     }
   }
 

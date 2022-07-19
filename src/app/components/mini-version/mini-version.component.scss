@@ -2,6 +2,10 @@
   max-width: 675px;
   margin: 0;
 
+  p {
+    margin: 0;
+  }
+
   h1 {
     margin: 0;
     font-size: 80px;
@@ -26,8 +30,8 @@
           display: flex;
 
           &__background {
-            padding: 5px;
             border-radius: 10px;
+            padding: 10px 5px;
             background-color: #3e82c3;
           }
 
@@ -36,7 +40,7 @@
             justify-content: center;
             align-items: center;
             color: white;
-            margin-right: 5px;
+            margin: 0 5px 0 0;
           }
 
           .tag__value {
@@ -179,7 +183,6 @@
     border-radius: 20px;
     cursor: pointer;
   }
-
 }
 
 @keyframes animation-Info-Content {
