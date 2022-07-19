@@ -68,11 +68,7 @@ export class FullVersionComponent {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      console.log('moveItemInArray');
-      // this.todoTasks = eventTasks;
-      // this.todoTasks.forEach((task) => {
-      //   task.status = Status.ToDo;
-      // });
+
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -80,11 +76,6 @@ export class FullVersionComponent {
         event.previousIndex,
         event.currentIndex,
       );
-      // this.doneTasks = eventTasks;
-      // this.doneTasks.forEach((task) => {
-      //   task.status = Status.Done;
-      // });
-      console.log('transferArrayItem');
     }
 
     this.todoTasks.forEach((task) => {
@@ -94,7 +85,6 @@ export class FullVersionComponent {
     this.doneTasks.forEach((task) => {
       task.status = Status.Done;
     });
-
     localStorage.setItem('allTasksToDo', JSON.stringify(this.todoTasks));
     localStorage.setItem('allTasksDone', JSON.stringify(this.doneTasks));
   }
