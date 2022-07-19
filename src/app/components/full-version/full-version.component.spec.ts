@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotfullversionComponent } from './notfullversion.component';
+import { FullVersionComponent } from './full-version.component';
 
-describe('NotfullversionComponent', () => {
-  let component: NotfullversionComponent;
-  let fixture: ComponentFixture<NotfullversionComponent>;
+describe('FullversionComponent', () => {
+  let component: FullVersionComponent;
+  let fixture: ComponentFixture<FullVersionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotfullversionComponent ]
+      declarations: [ FullVersionComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NotfullversionComponent);
+    fixture = TestBed.createComponent(FullVersionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

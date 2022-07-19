@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FullversionComponent } from './fullversion.component';
+import { MiniVersionComponent } from './mini-version.component.ts';
 
-describe('FullversionComponent', () => {
-  let component: FullversionComponent;
-  let fixture: ComponentFixture<FullversionComponent>;
+describe('NotfullversionComponent', () => {
+  let component: MiniVersionComponent;
+  let fixture: ComponentFixture<MiniVersionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FullversionComponent ]
+      declarations: [ MiniVersionComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FullversionComponent);
+    fixture = TestBed.createComponent(MiniVersionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

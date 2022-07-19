@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 
 export class AppComponent {
-  public isToggleVersion: boolean = true;
+  public isFullVersion: boolean = true;
   public dateTime: Date = new Date();
 
   constructor() {
