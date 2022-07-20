@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {ITask, Status} from "../../interface/tasks";
-// import {getTasksFromLocalStorage} from "../../get-tasks-from-local-storage";
-// import {updateLocalStorage} from "../../update-local-storage";
+import {getTasksFromLocalStorage} from "../../get-tasks-from-local-storage";
+import {updateLocalStorage} from "../../update-local-storage";
 
 @Component({
   selector: 'app-full-version',
@@ -12,81 +12,44 @@ import {ITask, Status} from "../../interface/tasks";
 
 export class FullVersionComponent {
 
-  public readonly storageAllTasksKey: string = 'allTasks';
+  public readonly status: typeof Status = Status;
+  public allTasks: ITask[] = [];
+  name: string = '';
 
   constructor() {
-
-
-    // this.allTasks = getTasksFromLocalStorage(this.storageAllTasksKey);
+    this.allTasks = getTasksFromLocalStorage();
   }
 
-  ngOnInit() {
-    let storageToDoTasks:string = localStorage.getItem('allTasksToDo') || '[]';
-    let storageDoneTasks:string = localStorage.getItem('allTasksDone') || '[]';
-    this.todoTasks = JSON.parse(storageToDoTasks);
-    this.doneTasks = JSON.parse(storageDoneTasks);
-    // this.todoTasks = this.allTasks.filter((task: ITask) => task.status === Status.ToDo)
-    // this.doneTasks = this.allTasks.filter((task: ITask) => task.status === Status.Done)
-  }
-
-  public allTasks: ITask[] = []
-  public todoTasks: ITask[] = []
-  public inProgressTasks: ITask[] = []
-  public doneTasks: ITask[] = []
-  name: string = ''
-
-  addTask(name: string): void {
-    let dataTasks: ITask = {
-      name: name,
-      isDone: false,
-      time: new Date(),
-      status: Status.ToDo
-    };
-
-    this.todoTasks.push(dataTasks);
-
-    this.name = ''
-  }
-
-  // public get todo(): ITask[] {
-  //   this.todoTasks = this.allTasks.filter((task: ITask) => task.status === Status.ToDo)
-  //   return this.todoTasks
-  // }
-  //
-  // public get inProgress(): ITask[] {
-  //   return this.allTasks.filter((task: ITask) => task.status === Status.InProgress)
-  // }
-  //
-  // public get done(): ITask[] {
-  //   this.doneTasks = this.allTasks.filter((task: ITask) => task.status === Status.Done)
-  //   return this.doneTasks
-  // }
-
-  drop(event: CdkDragDrop<ITask[], any>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+  ngDoCheck(){
+    let newAllTasks = getTasksFromLocalStorage();
+    if (this.allTasks.length < newAllTasks.length) {
+      this.allTasks = getTasksFromLocalStorage();
     }
-
-    this.todoTasks.forEach((task) => {
-      task.status = Status.ToDo;
-    });
-
-    this.doneTasks.forEach((task) => {
-      task.status = Status.Done;
-    });
-    localStorage.setItem('allTasksToDo', JSON.stringify(this.todoTasks));
-    localStorage.setItem('allTasksDone', JSON.stringify(this.doneTasks));
   }
 
+  public todo(): ITask[] {
+    return this.allTasks.filter((task: ITask) => task.status === Status.ToDo);
+  }
+
+  public inProgress(): ITask[] {
+    return this.allTasks.filter((task: ITask) => task.status === Status.InProgress);
+  }
+
+  public done(): ITask[] {
+    return this.allTasks.filter((task: ITask) => task.status === Status.Done);
+  }
+
+  public deleteOneTask(name: string): void {
+    this.allTasks = this.allTasks.filter(task => task.name !== name);
+    updateLocalStorage(this.allTasks);
+  }
+
+  drop(event: CdkDragDrop<ITask[]>, status: Status) {
+    console.log(event)
+    let task: ITask | undefined = this.allTasks.find((item: ITask) => item.name === event.item.data.name);
+    if (task) {
+      task.status = status;
+    }
+    updateLocalStorage(this.allTasks);
+  }
 }

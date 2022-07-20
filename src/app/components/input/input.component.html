@@ -1,0 +1,7 @@
+<input [(ngModel)]="task" type="text" placeholder="New task" maxlength="60"
+       (keydown.enter)="addTaskToList(task)" [class.input__invalid]="isInvalidInput">
+<button (click)="addTaskToList(task); $event.stopPropagation()" [class.button__invalid-input]="isInvalidInput">
+  <img class="btn-icon-new-task" src="../../../assets/new.svg" alt="Add new task">
+</button>
+
+<strong (click)="closeError()" *ngIf="isInvalidInput">The input field must not be empty and tasks must not be repeated</strong>

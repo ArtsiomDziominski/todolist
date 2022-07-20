@@ -7,25 +7,20 @@ app-fullversion {
   display: inline;
 }
 
-.time {
+.toggleButton {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  margin-right: 30px;
-
-  h2 {
-    display: flex;
-    justify-content: flex-end;
-    color: rgb(220, 220, 220);
-    position: relative;
-    top: -50px;
-    left: 30px;
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 80px;
-    color: white;
-  }
-
+  top: 10px;
+  left: 10px;
+  border: 0;
+  border-radius: 5px;
+  background-color: #3e82c3;
+  color: white;
+  height: 40px;
 }
+
+@media screen and (max-width: 1200px) {
+  .time {
+    display: none;
+  }
+}
+

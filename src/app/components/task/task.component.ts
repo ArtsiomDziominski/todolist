@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ITask} from "../../interface/tasks";
+import {ITask, Status} from "../../interface/tasks";
 
 @Component({
   selector: 'app-task',
@@ -7,6 +7,8 @@ import {ITask} from "../../interface/tasks";
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
+  public readonly Status: typeof Status = Status;
+
   @Input()
   task?: ITask;
   @Output()

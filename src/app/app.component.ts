@@ -7,15 +7,18 @@ import {Component} from '@angular/core';
 })
 
 export class AppComponent {
-  public isFullVersion: boolean = true;
-  public dateTime: Date = new Date();
+  public isFullVersion: boolean = false;
 
   constructor() {
-    this.updateTime()
+
   }
 
-  public updateTime(): void {
-    setInterval(() => this.dateTime = new Date(), 1000);
+  ngOnInit() {
+    this.isFullVersion = localStorage.getItem('version') == 'true';
   }
 
+  public toggleVersion(): void {
+    this.isFullVersion = !this.isFullVersion;
+    localStorage.setItem('version', String(this.isFullVersion))
+  }
 }

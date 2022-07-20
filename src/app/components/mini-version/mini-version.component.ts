@@ -3,7 +3,6 @@ import {ITask, Status} from "../../interface/tasks";
 import {updateLocalStorage} from "../../update-local-storage";
 import {getTasksFromLocalStorage} from "../../get-tasks-from-local-storage";
 
-
 @Component({
   selector: 'app-mini-version',
   templateUrl: './mini-version.component.html',
@@ -12,79 +11,46 @@ import {getTasksFromLocalStorage} from "../../get-tasks-from-local-storage";
 
 export class MiniVersionComponent {
   public readonly title = 'Angular ToDo List';
-  public readonly storageAllTasksKey: string = 'allTasks';
+  public readonly Status: typeof Status = Status;
 
   public task: string = '';
   public allTasks: ITask[] = [];
-  public isInvalidInput: boolean = false;
   public isShowInfoContent: boolean = false;
+  public dateTime: Date = new Date();
 
   public countDoneTask(): number {
-    return this.allTasks.filter(tasks => tasks.isDone).length;
-  }
-
-  public setValidityToInput(inputCheck: boolean): void {
-    this.isInvalidInput = inputCheck;
-  }
-
-  // public updateLocalStorage(tasks: ITask[]): void {
-  //   localStorage.setItem(this.storageAllTasksKey, JSON.stringify(tasks));
-  // }
-
-  // public getTasksFromLocalStorage(): ITask[] {
-  //   let getListTask: string = localStorage.getItem(this.storageAllTasksKey) || '[]';
-  //   return JSON.parse(getListTask);
-  // }
-
-  public checkDuplicatedTask(name: string): boolean {
-    return this.allTasks.some(task => task.name === name);
+    return this.allTasks.filter((task) => task.status === Status.Done).length;
   }
 
   constructor() {
-    this.allTasks = getTasksFromLocalStorage(this.storageAllTasksKey);
+    this.updateTime()
+    this.allTasks = getTasksFromLocalStorage();
   }
 
-  public addTaskToList(task: string): void {
-    const newTask: string = task.trim();
-
-    if (newTask && !this.checkDuplicatedTask(this.task)) {
-      this.setValidityToInput(false);
-
-      let dataTasks: ITask = {
-        name: newTask,
-        isDone: false,
-        time: new Date(),
-        status: Status.ToDo
-      };
-
-      this.allTasks.push(dataTasks);
-
-      this.task = '';
-
-      updateLocalStorage(this.allTasks);
-    } else {
-      this.setValidityToInput(true);
+  ngDoCheck(){
+    let newAllTasks = getTasksFromLocalStorage();
+    if (this.allTasks.length < newAllTasks.length) {
+      this.allTasks = getTasksFromLocalStorage();
     }
   }
 
   public toggleDoneTask(task: ITask): void {
-    task.isDone = !task.isDone;
-    if (task.status === Status.ToDo) {
-      task.status = Status.Done
-    } else {
+    if (task.status === Status.Done) {
       task.status = Status.ToDo
+    } else {
+      task.status = Status.Done
     }
-    updateLocalStorage(this.allTasks, this.storageAllTasksKey);
+    updateLocalStorage(this.allTasks);
   }
 
   public deleteOneTask(name: string): void {
     this.allTasks = this.allTasks.filter(task => task.name !== name);
-    updateLocalStorage(this.allTasks, this.storageAllTasksKey);
+    updateLocalStorage(this.allTasks);
   }
 
   public deleteDoneTask(): void {
-    this.allTasks = this.allTasks.filter(task => !task.isDone);
-    updateLocalStorage(this.allTasks, this.storageAllTasksKey);
+    this.allTasks = this.allTasks.filter((task) => task.status === Status.ToDo);
+    updateLocalStorage(this.allTasks);
   }
 
   public deleteAllTasks(): void {
@@ -95,5 +61,10 @@ export class MiniVersionComponent {
   public toggleInfoText(): void {
     this.isShowInfoContent = !this.isShowInfoContent;
   }
+
+  public updateTime(): void {
+    setInterval(() => this.dateTime = new Date(), 1000);
+  }
+
 }
 

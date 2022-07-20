@@ -1,10 +1,4 @@
-<div class="time">
-  <h1>{{ dateTime | date:'h:mm' }}</h1>
-  <h2>{{ dateTime | date:'a' }}</h2>
-  <h2>{{ dateTime | date:'EEEE, MMMM d' }}</h2>
-</div>
-
-<button (click)="this.isFullVersion = !this.isFullVersion">{{isFullVersion ? 'Mini Version' : 'Full Version'}}
+<button class="toggleButton" (click)="toggleVersion()">{{isFullVersion ? 'Mini Version' : 'Full Version'}}
 </button>
 
 <app-full-version *ngIf="isFullVersion; else miniVersion"></app-full-version>
