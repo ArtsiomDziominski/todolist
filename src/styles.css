@@ -1,20 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  height: 100vh;
+  padding-top: 50px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  height: 93vh;
   margin: 0;
-
   background-image: url("assets/backgrouncolor.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  overflow: hidden;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 500px) {
   body {
     display: block;
   }

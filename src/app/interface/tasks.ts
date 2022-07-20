@@ -1,9 +1,7 @@
 
 export interface ITask {
   name: string;
-  isDone?: boolean;
-  time?: Date;
-  status?: Status;
+  status: Status;
 }
 
 export enum Status {

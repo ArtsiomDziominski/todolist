@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 :host {
+  display: block;
   font-family: Poppins, sans-serif;
   font-weight: 600;
 }
@@ -15,15 +16,15 @@
   h2 {
     color: white;
   }
-}
 
-.example-list {
-  border: solid 1px #ccc;
-  min-height: 60px;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  display: block;
+  .example-list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+  }
 }
 
 .example-box {
@@ -38,6 +39,27 @@
   cursor: grab;
   background: white;
   font-size: 14px;
+
+  &__button-bin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+
+    img {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+
+    }
+  }
+}
+
+.example-box__done {
+  text-decoration: line-through;
+  background-color: #cccccc;
+  border-bottom: solid 1px #ababab;
 }
 
 .cdk-drag-preview {

@@ -1,3 +1,9 @@
+<div class="time">
+  <h1>{{ dateTime | date:'h:mm' }}</h1>
+  <h2>{{ dateTime | date:'a' }}</h2>
+  <h2>{{ dateTime | date:'EEEE, MMMM d' }}</h2>
+</div>
+
 <h1 class="page-title">{{title}}</h1>
 <div class="dashboard">
   <div class="dashboard-info">
@@ -25,23 +31,22 @@
   <div class="dashboard-content">
     <div class="task-list__wrapper">
       <div class="task-list">
-
-        <div *ngFor="let task of allTasks" class="task-list__item"
-             [class.task-list__item-task-completed]="task.isDone">
+        <div *ngFor="let task of allTasks"
+             [class.task-list__item-task-completed]="task.status === Status.Done"
+             class="task-list__item">
 
           <app-task [task]="task" (changeStatus)="toggleDoneTask(task)"></app-task>
 
           <div class="task-list__btn">
-            <p class="task-list__time">{{ task.time | date:'shortDate' }}  {{ task.time | date:'shortTime' }}</p>
             <img class="task-list__bin" src="../../../assets/bin.svg" (click)="deleteOneTask(task.name)" alt="Delete task">
           </div>
         </div>
       </div>
     </div>
     <div class="task-new">
-      <div class="task-new__field" [class.task-new__input-check]="isInvalidInput">
+      <div class="task-new__field">
 
-        <app-input (changeStatusInput)="addTaskToList($event)"></app-input>
+        <app-input></app-input>
 
       </div>
     </div>
