@@ -6,6 +6,7 @@ import {ITask, Status} from "../../interface/tasks";
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
+
 export class TaskComponent {
   public readonly Status: typeof Status = Status;
 

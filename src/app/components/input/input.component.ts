@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {ITask, Status} from "../../interface/tasks";
-import {getTasksFromLocalStorage} from "../../get-tasks-from-local-storage";
+import {getFromLocalStorage} from "../../get-from-local-storage";
 import {updateLocalStorage} from "../../update-local-storage";
+import {storageAllTasksKey} from "../const";
 
 @Component({
   selector: 'app-input',
@@ -9,18 +10,14 @@ import {updateLocalStorage} from "../../update-local-storage";
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent {
-
-  @Output() changeStatusInput: EventEmitter<string> = new EventEmitter<string>();
-  task: string = '';
+  @Output() changeStatusAllTasks: EventEmitter<ITask[]> = new EventEmitter<ITask[]>();
+  public task: string = '';
   public allTasks: ITask[] = [];
   public isInvalidInput: boolean = false;
 
-  ngOnInit() {
-    this.allTasks = getTasksFromLocalStorage();
-  }
-
-  ngDoCheck() {
-    this.allTasks = getTasksFromLocalStorage();
+  public ngOnInit(): void {
+    let getListTask:string = getFromLocalStorage(storageAllTasksKey) || '[]';
+    this.allTasks = JSON.parse(getListTask);
   }
 
   public checkDuplicatedTask(name: string): boolean {
@@ -29,7 +26,6 @@ export class InputComponent {
 
   public addTaskToList(name: string): void {
     const newTask: string = name.trim();
-
     if (newTask && !this.checkDuplicatedTask(this.task)) {
       this.isInvalidInput = false;
       let dataTasks: ITask = {
@@ -37,14 +33,15 @@ export class InputComponent {
         status: Status.ToDo
       };
       this.allTasks.push(dataTasks);
-      updateLocalStorage(this.allTasks);
+      updateLocalStorage(storageAllTasksKey, JSON.stringify(this.allTasks));
       this.task = '';
     } else {
       this.isInvalidInput = true;
     }
+    this.changeStatusAllTasks.emit(this.allTasks);
   }
 
-  public closeError():void {
+  public closeError(): void {
     this.isInvalidInput = false;
   }
 }

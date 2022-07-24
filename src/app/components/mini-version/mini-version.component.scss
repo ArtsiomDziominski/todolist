@@ -6,11 +6,11 @@
     position: absolute;
     top: 20px;
     right: 10px;
+    color: var(--btn-txt-color);
 
     h2 {
       display: flex;
       justify-content: flex-end;
-      color: rgb(220, 220, 220);
       position: relative;
       top: -80px;
     }
@@ -18,7 +18,7 @@
     h1 {
       margin-left: 0;
       font-size: 80px;
-      color: white;
+      color: var(--btn-txt-color);
     }
   }
 
@@ -29,15 +29,15 @@
   h1 {
     margin: 0;
     font-size: 80px;
-    color: white;
+    color: var(--btn-txt-color);
   }
 
   .dashboard {
     width: 100%;
-    background-color: #fff;
+    background-color: var(--background-white-black);
 
     &-info {
-      background-color: #f2f2f2;
+      background-color: var(--background-white-black);
 
       &__list {
         display: flex;
@@ -52,14 +52,14 @@
           &__background {
             border-radius: 10px;
             padding: 10px 5px;
-            background-color: #3e82c3;
+            background-color: var(--btn-background);
           }
 
           .tag__name {
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: var(--btn-txt-color);
             margin: 0 5px 0 0;
           }
 
@@ -70,7 +70,8 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background-color: white;
+            color: var(--color-txt-white-black);
+            background-color: var(--background-white-black);
           }
 
           .dashboard-info__btn-delete {
@@ -80,7 +81,7 @@
             align-items: center;
             border: 0;
             border-radius: 10px;
-            color: white;
+            color: var(--btn-txt-color);
 
             img {
               width: 30px;
@@ -92,6 +93,7 @@
     }
 
     .dashboard-content {
+      background-color: var(--background-white-black);
 
       .task-list__wrapper {
         height: 290px;
@@ -129,7 +131,7 @@
         .task-list__item-task-completed {
           text-decoration: line-through;
           color: gray;
-          background-color: #c3bbb6;
+          background-color: var(--background-black-grey);
         }
       }
 
@@ -137,7 +139,7 @@
         padding: 15px 0;
         width: 100%;
         height: 50px;
-        background-color: #f1f1f1;
+        background-color: var(--background-white-black);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -181,7 +183,19 @@
     border-radius: 20px;
     cursor: pointer;
   }
+
+  .dashboard-info__dark-mode {
+    background-color: black;
+    color: white;
+  }
+
+  .tag_dark-mode {
+    background-color: black;
+    color: white;
+  }
 }
+
+
 
 @media screen and (max-width: 1200px) {
   :host {

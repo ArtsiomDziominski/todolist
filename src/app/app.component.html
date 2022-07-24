@@ -1,9 +1,13 @@
-<button class="toggleButton" (click)="toggleVersion()">{{isFullVersion ? 'Mini Version' : 'Full Version'}}
-</button>
+<div class="{{isToggleDarkMode ? 'dark-mode' : 'light-mode'}}">
+  <button class="button__toggle-version" (click)="toggleVersion()">{{isFullVersion ? 'Mini Version' : 'Full Version'}}
+  </button>
 
-<app-full-version *ngIf="isFullVersion; else miniVersion"></app-full-version>
+  <button class="button__toggle-mode" (click)="ToggleDarkMode()">{{!isToggleDarkMode ? 'Dark Mode' : 'Light Mode'}}
+  </button>
 
-<ng-template #miniVersion>
-  <app-mini-version></app-mini-version>
-</ng-template>
+  <app-full-version *ngIf="isFullVersion; else miniVersion"></app-full-version>
 
+  <ng-template #miniVersion>
+    <app-mini-version [isToggleDarkMode]="isToggleDarkMode"></app-mini-version>
+  </ng-template>
+</div>
