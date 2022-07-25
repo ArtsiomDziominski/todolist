@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {ITask, Status} from "../../interface/tasks";
 import {updateLocalStorage} from "../../update-local-storage";
 import {getFromLocalStorage} from "../../get-from-local-storage";
-import {storageAllTasksKey} from "../const";
+import {STORAGE_ALL_TASKS_KEY} from "../const";
 
 @Component({
   selector: 'app-mini-version',
@@ -20,7 +20,7 @@ export class MiniVersionComponent {
   public dateTime: Date = new Date();
 
   @Input()
-  isToggleDarkMode?: boolean;
+  public isToggleDarkMode?: boolean;
 
   public countDoneTask(): number {
     return this.allTasks.filter((task) => task.status === Status.Done).length;
@@ -28,7 +28,7 @@ export class MiniVersionComponent {
 
   constructor() {
     this.updateTime();
-    let getListTask:string = getFromLocalStorage(storageAllTasksKey) || '[]';
+    const getListTask:string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
     this.allTasks = JSON.parse(getListTask);
   }
 
@@ -38,22 +38,22 @@ export class MiniVersionComponent {
     } else {
       task.status = Status.Done;
     }
-    updateLocalStorage(storageAllTasksKey, JSON.stringify(this.allTasks));
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
   public deleteOneTask(name: string): void {
     this.allTasks = this.allTasks.filter(task => task.name !== name);
-    updateLocalStorage(storageAllTasksKey, JSON.stringify(this.allTasks));
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
   public deleteDoneTask(): void {
     this.allTasks = this.allTasks.filter((task) => task.status === Status.ToDo);
-    updateLocalStorage(storageAllTasksKey, JSON.stringify(this.allTasks));
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
   public deleteAllTasks(): void {
     this.allTasks = [];
-    localStorage.removeItem(storageAllTasksKey);
+    localStorage.removeItem(STORAGE_ALL_TASKS_KEY);
   }
 
   public toggleInfoText(): void {

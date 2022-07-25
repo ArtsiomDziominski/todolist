@@ -2,7 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {ITask, Status} from "../../interface/tasks";
 import {getFromLocalStorage} from "../../get-from-local-storage";
 import {updateLocalStorage} from "../../update-local-storage";
-import {storageAllTasksKey} from "../const";
+import {STORAGE_ALL_TASKS_KEY} from "../const";
 
 @Component({
   selector: 'app-input',
@@ -16,7 +16,7 @@ export class InputComponent {
   public isInvalidInput: boolean = false;
 
   public ngOnInit(): void {
-    let getListTask:string = getFromLocalStorage(storageAllTasksKey) || '[]';
+    const getListTask:string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
     this.allTasks = JSON.parse(getListTask);
   }
 
@@ -33,7 +33,7 @@ export class InputComponent {
         status: Status.ToDo
       };
       this.allTasks.push(dataTasks);
-      updateLocalStorage(storageAllTasksKey, JSON.stringify(this.allTasks));
+      updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
       this.task = '';
     } else {
       this.isInvalidInput = true;

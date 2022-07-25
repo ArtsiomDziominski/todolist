@@ -3,7 +3,7 @@ import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {ITask, Status} from "../../interface/tasks";
 import {getFromLocalStorage} from "../../get-from-local-storage";
 import {updateLocalStorage} from "../../update-local-storage";
-import {storageAllTasksKey} from "../const";
+import {STORAGE_ALL_TASKS_KEY} from "../const";
 
 @Component({
   selector: 'app-full-version',
@@ -17,7 +17,7 @@ export class FullVersionComponent {
   public name: string = '';
 
   constructor() {
-    let getListTask:string = getFromLocalStorage(storageAllTasksKey) || '[]';
+    let getListTask:string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
     this.allTasks = JSON.parse(getListTask);
   }
 
@@ -35,7 +35,7 @@ export class FullVersionComponent {
 
   public deleteOneTask(name: string): void {
     this.allTasks = this.allTasks.filter(task => task.name !== name);
-    updateLocalStorage(storageAllTasksKey, JSON.stringify(this.allTasks));
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
   public drop(event: CdkDragDrop<ITask[]>, status: Status): void {
@@ -43,7 +43,7 @@ export class FullVersionComponent {
     if (task) {
       task.status = status;
     }
-    updateLocalStorage(storageAllTasksKey, JSON.stringify(this.allTasks));
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
   public updateAllTasks($event: ITask[]): void {

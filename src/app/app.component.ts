@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {getFromLocalStorage} from "./get-from-local-storage";
 import {updateLocalStorage} from "./update-local-storage";
-import {storageDarkModeKey, storageVersionKey} from "./components/const";
+import {STORAGE_DARK_MODE_KEY, STORAGE_VERSION_KEY} from "./components/const";
 
 @Component({
   selector: 'app-root',
@@ -14,17 +14,17 @@ export class AppComponent {
   public isToggleDarkMode: boolean = false;
 
   public ngOnInit(): void {
-    this.isFullVersion = getFromLocalStorage(storageVersionKey) == 'true';
-    this.isToggleDarkMode = getFromLocalStorage(storageDarkModeKey) == 'true';
+    this.isFullVersion = getFromLocalStorage(STORAGE_VERSION_KEY) === 'true';
+    this.isToggleDarkMode = getFromLocalStorage(STORAGE_DARK_MODE_KEY) === 'true';
   }
 
   public toggleVersion(): void {
     this.isFullVersion = !this.isFullVersion;
-    updateLocalStorage(storageVersionKey, String(this.isFullVersion));
+    updateLocalStorage(STORAGE_VERSION_KEY, String(this.isFullVersion));
   }
 
   public ToggleDarkMode(): void {
     this.isToggleDarkMode=!this.isToggleDarkMode
-    updateLocalStorage(storageDarkModeKey, String(this.isToggleDarkMode));
+    updateLocalStorage(STORAGE_DARK_MODE_KEY, String(this.isToggleDarkMode));
   }
 }
