@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FullVersionComponent } from './full-version.component';
 
-describe('FullversionComponent', () => {
+describe('full-versionComponent', () => {
   let component: FullVersionComponent;
   let fixture: ComponentFixture<FullVersionComponent>;
 

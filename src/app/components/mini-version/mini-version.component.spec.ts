@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MiniVersionComponent } from './mini-version.component.ts';
+import { MiniVersionComponent } from './mini-version.component';
 
-describe('NotfullversionComponent', () => {
+describe('mini-versionComponent', () => {
   let component: MiniVersionComponent;
   let fixture: ComponentFixture<MiniVersionComponent>;
 

@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {ITask, Status} from "../../interface/tasks";
-import {getTasksFromLocalStorage} from "../../get-tasks-from-local-storage";
+import {getFromLocalStorage} from "../../get-from-local-storage";
 import {updateLocalStorage} from "../../update-local-storage";
+import {STORAGE_ALL_TASKS_KEY} from "../const";
 
 @Component({
   selector: 'app-full-version',
@@ -11,20 +12,13 @@ import {updateLocalStorage} from "../../update-local-storage";
 })
 
 export class FullVersionComponent {
-
   public readonly status: typeof Status = Status;
   public allTasks: ITask[] = [];
-  name: string = '';
+  public name: string = '';
 
   constructor() {
-    this.allTasks = getTasksFromLocalStorage();
-  }
-
-  ngDoCheck(){
-    let newAllTasks = getTasksFromLocalStorage();
-    if (this.allTasks.length < newAllTasks.length) {
-      this.allTasks = getTasksFromLocalStorage();
-    }
+    let getListTask:string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
+    this.allTasks = JSON.parse(getListTask);
   }
 
   public todo(): ITask[] {
@@ -41,15 +35,18 @@ export class FullVersionComponent {
 
   public deleteOneTask(name: string): void {
     this.allTasks = this.allTasks.filter(task => task.name !== name);
-    updateLocalStorage(this.allTasks);
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
-  drop(event: CdkDragDrop<ITask[]>, status: Status) {
-    console.log(event)
+  public drop(event: CdkDragDrop<ITask[]>, status: Status): void {
     let task: ITask | undefined = this.allTasks.find((item: ITask) => item.name === event.item.data.name);
     if (task) {
       task.status = status;
     }
-    updateLocalStorage(this.allTasks);
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
+  }
+
+  public updateAllTasks($event: ITask[]): void {
+    this.allTasks = $event;
   }
 }
