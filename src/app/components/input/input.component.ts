@@ -28,9 +28,11 @@ export class InputComponent {
     const newTask: string = name.trim();
     if (newTask && !this.checkDuplicatedTask(this.task)) {
       this.isInvalidInput = false;
-      let dataTasks: ITask = {
+      const dataTasks: ITask = {
+        id: Math.random(),
         name: name,
-        status: Status.ToDo
+        status: Status.ToDo,
+        date: new Date()
       };
       this.allTasks.push(dataTasks);
       updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));

@@ -1,0 +1,14 @@
+<div class="container">
+  <button [routerLink]="'/'">< Back</button>
+  <img class="delete-task__bin" src="../../../assets/bin.svg" (click)="deleteOneTask(task[0].id)" [routerLink]="'/'"
+       alt="Delete task">
+</div>
+
+<p class="task-name" *ngIf="!isEditTask" (click)="isEditTask=!isEditTask">{{task[0].name}}</p>
+<input type="text" class="task-name-input" *ngIf="isEditTask" [(ngModel)]="task[0].name" (keydown.enter)="editTask(task[0].id, task[0].name)">
+<div>
+  <button class="button-save" *ngIf="isEditTask" (click)="editTask(task[0].id, task[0].name)">Save</button>
+  <button class="button-cancel" *ngIf="isEditTask" (click)="isEditTask=!isEditTask">Cancel</button>
+</div>
+<p>{{task[0].status}}</p>
+<p>{{task[0].date}}</p>

@@ -8,6 +8,12 @@ import {FullVersionComponent} from './components/full-version/full-version.compo
 import {MiniVersionComponent} from './components/mini-version/mini-version.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {InputComponent} from './components/input/input.component';
+import { DetailComponent } from './components/pages/detail/detail.component';
+import { NotFoundComponent } from './components/pages/not-found/not-found.component';
+import {RouterModule} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
+import { MainComponent } from './components/pages/main/main.component';
+
 
 @NgModule({
   declarations: [
@@ -15,14 +21,19 @@ import {InputComponent} from './components/input/input.component';
     TaskComponent,
     FullVersionComponent,
     MiniVersionComponent,
-    InputComponent
+    InputComponent,
+    DetailComponent,
+    NotFoundComponent,
+    MainComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DragDropModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DragDropModule,
+        RouterModule,
+        AppRoutingModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

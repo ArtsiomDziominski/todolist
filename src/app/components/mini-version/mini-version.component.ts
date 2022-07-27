@@ -41,9 +41,12 @@ export class MiniVersionComponent {
     updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
-  public deleteOneTask(name: string): void {
-    this.allTasks = this.allTasks.filter(task => task.name !== name);
-    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
+  public deleteOneTask(id: number): void {
+    let isDeleteTask: boolean = confirm('Delete?');
+    if (isDeleteTask) {
+      this.allTasks = this.allTasks.filter(task => task.id !== id);
+      updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
+    }
   }
 
   public deleteDoneTask(): void {

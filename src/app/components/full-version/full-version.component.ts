@@ -16,6 +16,18 @@ export class FullVersionComponent {
   public allTasks: ITask[] = [];
   public name: string = '';
 
+  public countToDoTask(): number {
+    return this.allTasks.filter((task) => task.status === Status.ToDo).length;
+  }
+
+  public countInProgressTask(): number {
+    return this.allTasks.filter((task) => task.status === Status.InProgress).length;
+  }
+
+  public countDoneTask(): number {
+    return this.allTasks.filter((task) => task.status === Status.Done).length;
+  }
+
   constructor() {
     let getListTask:string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
     this.allTasks = JSON.parse(getListTask);
@@ -33,9 +45,12 @@ export class FullVersionComponent {
     return this.allTasks.filter((task: ITask) => task.status === Status.Done);
   }
 
-  public deleteOneTask(name: string): void {
-    this.allTasks = this.allTasks.filter(task => task.name !== name);
-    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
+  public deleteOneTask(id: number): void {
+    let isDeleteTask: boolean = confirm('Delete?');
+    if (isDeleteTask) {
+      this.allTasks = this.allTasks.filter((task) => task.id !== id);
+      updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
+    }
   }
 
   public drop(event: CdkDragDrop<ITask[]>, status: Status): void {
