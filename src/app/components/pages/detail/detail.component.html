@@ -1,14 +1,29 @@
 <div class="container">
-  <button [routerLink]="'/'">< Back</button>
+  <button mat-raised-button color="primary" [routerLink]="'/'">< Back</button>
   <img class="delete-task__bin" src="../../../assets/bin.svg" (click)="deleteOneTask(task[0].id)" [routerLink]="'/'"
-       alt="Delete task">
+       alt="bin">
 </div>
 
 <p class="task-name" *ngIf="!isEditTask" (click)="isEditTask=!isEditTask">{{task[0].name}}</p>
 <input type="text" class="task-name-input" *ngIf="isEditTask" [(ngModel)]="task[0].name" (keydown.enter)="editTask(task[0].id, task[0].name)">
 <div>
-  <button class="button-save" *ngIf="isEditTask" (click)="editTask(task[0].id, task[0].name)">Save</button>
-  <button class="button-cancel" *ngIf="isEditTask" (click)="isEditTask=!isEditTask">Cancel</button>
+  <button mat-raised-button color="primary" *ngIf="isEditTask" (click)="editTask(task[0].id, task[0].name)">Save</button>
+  <button mat-raised-button color="primary" *ngIf="isEditTask" (click)="isEditTask=!isEditTask">Cancel</button>
 </div>
-<p>{{task[0].status}}</p>
-<p>{{task[0].date}}</p>
+
+<div class="select-drop-down">
+  <p>Status: </p>
+  <mat-form-field appearance="fill">
+    <mat-select [(value)]="task[0].status">
+      <mat-option value="todo"  (click)="changeStatus(task[0].name, status.ToDo)">ToDo</mat-option>
+      <mat-option value="inProgress"  (click)="changeStatus(task[0].name, status.InProgress)">InProgress</mat-option>
+      <mat-option value="done" (click)="changeStatus(task[0].name, status.Done)">Done</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<p>{{task[0].date | date:'EEEE, MMMM d, y, h:mm:ss a'}}</p>
+
+
+
+

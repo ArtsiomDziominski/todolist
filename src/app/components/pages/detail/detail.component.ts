@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {getFromLocalStorage} from "../../../get-from-local-storage";
-import {ITask} from "../../../interface/tasks";
+import {ITask, Status} from "../../../interface/tasks";
 import {STORAGE_ALL_TASKS_KEY} from "../../const";
 import {updateLocalStorage} from "../../../update-local-storage";
 
@@ -12,6 +12,7 @@ import {updateLocalStorage} from "../../../update-local-storage";
 })
 
 export class DetailComponent {
+  public readonly status: typeof Status = Status;
   public taskId: number;
   public task: ITask[] = [];
   public allTasks: ITask[] = [];
@@ -39,6 +40,15 @@ export class DetailComponent {
         task.name = name;
       }
     })
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
+  }
+
+  public changeStatus(name: string, status: Status): void {
+    this.allTasks.forEach(task => {
+      if (task.name === name) {
+        task.status = status;
+      }
+    });
     updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 }

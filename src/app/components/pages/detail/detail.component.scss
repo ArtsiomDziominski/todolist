@@ -1,20 +1,13 @@
 :host {
   color: black;
-  background-color: white;
+  background-color: #f8f8f8;
   padding: 40px 50px;
   min-width: 1000px;
   max-height: 350px;
   font-family: Poppins, sans-serif;
 
   button {
-    width: 70px;
-    height: 30px;
-    border: 0;
-    border-radius: 10px;
-    background-color: #3E82C3FF;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+    margin: 0 5px;
   }
 
   .container {
@@ -48,8 +41,13 @@
     margin-bottom: 5px;
   }
 
-  .button-save {
-    border: 0;
-    width: 50px;
+  .select-drop-down {
+    display: flex;
+    align-items: center;
+
+    p {
+      font-size: 15px;
+      margin: 10px;
+    }
   }
 }

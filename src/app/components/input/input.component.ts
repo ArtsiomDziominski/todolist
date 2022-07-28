@@ -16,7 +16,7 @@ export class InputComponent {
   public isInvalidInput: boolean = false;
 
   public ngOnInit(): void {
-    const getListTask:string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
+    const getListTask: string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
     this.allTasks = JSON.parse(getListTask);
   }
 
@@ -32,7 +32,7 @@ export class InputComponent {
         id: Math.random(),
         name: name,
         status: Status.ToDo,
-        date: new Date()
+        date: new  Date()
       };
       this.allTasks.push(dataTasks);
       updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
