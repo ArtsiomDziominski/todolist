@@ -3,6 +3,8 @@ import {ITask, Status} from "../../interface/tasks";
 import {updateLocalStorage} from "../../update-local-storage";
 import {getFromLocalStorage} from "../../get-from-local-storage";
 import {STORAGE_ALL_TASKS_KEY} from "../const";
+import {DialogBoxForDeleteComponent} from "../dialog-box-for-delete/dialog-box-for-delete.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-mini-version',
@@ -26,10 +28,21 @@ export class MiniVersionComponent {
     return this.allTasks.filter((task) => task.status === Status.Done).length;
   }
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.updateTime();
-    const getListTask:string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
+    const getListTask: string = getFromLocalStorage(STORAGE_ALL_TASKS_KEY) || '[]';
     this.allTasks = JSON.parse(getListTask);
+  }
+
+  public openDialog(id: number): void {
+    const dialogRef = this.dialog.open(DialogBoxForDeleteComponent, {
+      width: '250px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteOneTask(id);
+      }
+    });
   }
 
   public toggleDoneTask(task: ITask): void {
@@ -42,11 +55,8 @@ export class MiniVersionComponent {
   }
 
   public deleteOneTask(id: number): void {
-    let isDeleteTask: boolean = confirm('Delete?');
-    if (isDeleteTask) {
-      this.allTasks = this.allTasks.filter(task => task.id !== id);
-      updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
-    }
+    this.allTasks = this.allTasks.filter(task => task.id !== id);
+    updateLocalStorage(STORAGE_ALL_TASKS_KEY, JSON.stringify(this.allTasks));
   }
 
   public deleteDoneTask(): void {

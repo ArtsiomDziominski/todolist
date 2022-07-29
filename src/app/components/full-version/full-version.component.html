@@ -1,4 +1,4 @@
-<app-input (changeStatusAllTasks)="updateAllTasks($event)"></app-input>
+<app-input (changeStatusAllTasks)="updateAllTasks($event)" [allTasks]="allTasks"></app-input>
 
 <div cdkDropListGroup>
   <div class="example-container">
@@ -7,12 +7,10 @@
       <p class="example-container__value">{{countToDoTask()}}</p>
     </div>
     <div cdkDropList
-         [cdkDropListData]="allTasks"
          class="example-list"
-         #toDolist="cdkDropList"
-         [cdkDropListConnectedTo]="[doneList]"
-         (cdkDropListDropped)="drop($event, status.ToDo)">
-      <div class="example-box" *ngFor="let task of todo()" cdkDrag [cdkDragData]="task" [routerLink]="'/details/'+ task.id">
+         (cdkDropListDropped)="dropDown($event, status.ToDo)">
+      <div class="example-box" *ngFor="let task of todo" cdkDrag [cdkDragData]="task"
+           [routerLink]="'/details/'+ task.id">
         <div class="example-box__text" [routerLink]="'/details/'+ task.id">
           {{task.name}}
         </div>
@@ -26,12 +24,9 @@
       <p class="example-container__value">{{countInProgressTask()}}</p>
     </div>
     <div cdkDropList
-         #doneList="cdkDropList"
-         [cdkDropListData]="inProgress()"
          class="example-list"
-         [cdkDropListConnectedTo]="[toDolist]"
-         (cdkDropListDropped)="drop($event, status.InProgress)">
-      <div class="example-box" *ngFor="let task of inProgress()" cdkDrag [cdkDragData]="task">
+         (cdkDropListDropped)="dropDown($event, status.InProgress)">
+      <div class="example-box" *ngFor="let task of inProgress" cdkDrag [cdkDragData]="task">
         <div class="example-box__text" [routerLink]="'/details/'+ task.id">
           {{task.name}}
         </div>
@@ -45,17 +40,14 @@
       <p class="example-container__value">{{countDoneTask()}}</p>
     </div>
     <div cdkDropList
-         #doneList="cdkDropList"
-         [cdkDropListData]="done()"
          class="example-list"
-         [cdkDropListConnectedTo]="[toDolist]"
-         (cdkDropListDropped)="drop($event, status.Done)">
-      <div class="example-box example-box__done" *ngFor="let task of done()" cdkDrag [cdkDragData]="task">
+         (cdkDropListDropped)="dropDown($event, status.Done)">
+      <div class="example-box example-box__done" *ngFor="let task of done" cdkDrag [cdkDragData]="task">
         <div class="example-box__text" [routerLink]="'/details/'+ task.id">
           {{task.name}}
         </div>
         <div class="example-box__button-bin">
-          <img src="../../../assets/bin.svg" (click)="deleteOneTask(task.id)" alt="Delete task">
+          <img src="../../../assets/bin.svg" (click)="openDialog(task.id)" alt="Delete task">
         </div>
       </div>
     </div>

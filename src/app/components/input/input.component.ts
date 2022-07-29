@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ITask, Status} from "../../interface/tasks";
 import {getFromLocalStorage} from "../../get-from-local-storage";
 import {updateLocalStorage} from "../../update-local-storage";
@@ -10,9 +10,9 @@ import {STORAGE_ALL_TASKS_KEY} from "../const";
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent {
+  @Input() allTasks: ITask[] = [];
   @Output() changeStatusAllTasks: EventEmitter<ITask[]> = new EventEmitter<ITask[]>();
   public task: string = '';
-  public allTasks: ITask[] = [];
   public isInvalidInput: boolean = false;
 
   public ngOnInit(): void {
