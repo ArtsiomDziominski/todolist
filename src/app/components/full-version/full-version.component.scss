@@ -3,6 +3,9 @@
   font-family: Poppins, sans-serif;
   font-weight: 600;
 
+  app-input {
+    margin-top: 80px;
+  }
 }
 
 .example-container {
@@ -11,6 +14,24 @@
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
+
+  .example-container__title-todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .example-container__value {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: var(--color-txt-white-black);
+      background-color: var(--background-white-black);
+      margin-right: 50px;
+    }
+  }
 
   h2 {
     color: var(--btn-txt-color);
@@ -38,6 +59,10 @@
   cursor: grab;
   background: var(--background-white-black);
   font-size: 14px;
+
+  &__text {
+    cursor: pointer;
+  }
 
   &__button-bin {
     display: flex;
